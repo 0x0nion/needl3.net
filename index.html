@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>needl3.net — Windows 95 Edition</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Retro Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- QRCode.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+      // =========================================================
+      // CONFIG: Вставьте вашу ссылку на Telegram-бот сюда!
+      // =========================================================
+      const CONFIG = {
+        tgBotUrl: "https://t.me/YOUR_BOT_USERNAME_HERE"
+      };
+
+      // TRANSLATIONS: Тексты на RU / EN / ES
+      const TRANSLATIONS = {
+        ru: {
+          mmsSubtitle: "CRM система в Telegram",
+          mmsDesc: "Многопользовательская CRM-система и платформа для магазинов в Telegram. Проект с открытым исходным кодом (Open-Source), удобное управление товарами и заказами.",
+          btnOpenBot: "СМОТРЕТЬ",
+          scanQrHint: "СКАНИРУЙ",
+          devTitle: "В разработке",
+          devDesc: "Новые модули и системы автоматизации находятся в активной разработке.",
+          devStatus: "[ 0% COMPLETED ]",
+          langLabel: "RU",
+          startBtn: "Пуск",
+          activeTab: "needl3.net"
+        },
+        en: {
+          mmsSubtitle: "Telegram CRM System",
+          mmsDesc: "Multi-tenant CRM system and e-commerce platform inside Telegram. Open-source project with easy product, order, and client management.",
+          btnOpenBot: "VIEW",
+          scanQrHint: "SCAN ME",
+          devTitle: "In Development",
+          devDesc: "New modules and automation systems are currently under active development.",
+          devStatus: "[ 0% COMPLETED ]",
+          langLabel: "EN",
+          startBtn: "Start",
+          activeTab: "needl3.net"
+        },
+        es: {
+          mmsSubtitle: "Sistema CRM en Telegram",
+          mmsDesc: "Sistema CRM multiusuario y plataforma de comercio electrónico en Telegram. Proyecto de código abierto con gestión intuitiva de pedidos y clientes.",
+          btnOpenBot: "VER",
+          scanQrHint: "ESCÁNAME",
+          devTitle: "En Desarrollo",
+          devDesc: "Nuevos módulos y sistemas de automatización están en desarrollo activo.",
+          devStatus: "[ 0% COMPLETED ]",
+          langLabel: "ES",
+          startBtn: "Inicio",
+          activeTab: "needl3.net"
+        }
+      };
+
+      let currentLang = 'ru';
+    </script>
+
+    <style>
+        :root {
+            --win-bg: #2b606e;
+            --win-gray: #c0c0c0;
+            --win-dark-gray: #808080;
+            --win-black: #000000;
+            --win-white: #ffffff;
+            --win-navy: #000080;
+            --win-teal: #008080;
+        }
+
+        body {
+            background-color: var(--win-bg);
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            color: #000;
+            user-select: none;
+            overflow-x: hidden;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);
+            background-size: 4px 4px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .win-outset {
+            background: var(--win-gray);
+            box-shadow: 
+                inset 1.5px 1.5px 0px var(--win-white),
+                inset -1.5px -1.5px 0px var(--win-dark-gray),
+                1.5px 1.5px 0px var(--win-black);
+        }
+
+        .win-inset {
+            background: var(--win-white);
+            box-shadow: 
+                inset 1.5px 1.5px 0px var(--win-dark-gray),
+                inset -1.5px -1.5px 0px var(--win-white),
+                inset 3px 3px 0px #404040;
+        }
+
+        .win-button {
+            background: var(--win-gray);
+            box-shadow: 
+                inset 1.5px 1.5px 0px var(--win-white),
+                inset -1.5px -1.5px 0px var(--win-dark-gray),
+                1.5px 1.5px 0px var(--win-black);
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            touch-action: manipulation;
+        }
+
+        .win-button:active {
+            box-shadow: 
+                inset 1.5px 1.5px 0px var(--win-black),
+                inset -1.5px -1.5px 0px var(--win-white);
+            padding-top: 2px;
+            padding-left: 2px;
+        }
+
+        .win-titlebar {
+            background: linear-gradient(90deg, var(--win-navy), #1084d0);
+            color: var(--win-white);
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%);
+            background-size: 100% 4px;
+        }
+
+        #qrcode img {
+            margin: 0 auto;
+            image-rendering: pixelated;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Mobile responsiveness adjustments */
+        @media (max-width: 640px) {
+            body {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen pb-20 sm:pb-16">
+    <div class="scanlines"></div>
+
+    <main class="flex-grow container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-5xl z-10 w-full">
+        <!-- Header -->
+        <header class="win-outset p-2 mb-4 sm:mb-8 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-blue-900 flex items-center justify-center text-white font-bold text-xs shadow-inner">
+                    N3
+                </div>
+                <span class="font-bold tracking-widest text-base sm:text-xl font-['VT323'] truncate max-w-[180px] sm:max-w-none">
+                    C:\NEEDL3.NET
+                </span>
+            </div>
+
+            <!-- Language Switcher Bar -->
+            <div class="flex items-center gap-1 bg-[#a0a0a0] p-1 border border-gray-600">
+                <button onclick="setLanguage('ru')" id="lang-ru" class="win-button px-2 py-1 text-xs font-bold bg-white">RU</button>
+                <button onclick="setLanguage('en')" id="lang-en" class="win-button px-2 py-1 text-xs font-bold">EN</button>
+                <button onclick="setLanguage('es')" id="lang-es" class="win-button px-2 py-1 text-xs font-bold">ES</button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+
+            <!-- WINDOW 1: MAKE MY SHOP -->
+            <div class="win-outset p-1 flex flex-col justify-between h-full shadow-2xl">
+                <div class="win-titlebar px-2 py-1 flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-300 font-mono text-xs">🖳</span>
+                        <span class="font-bold text-sm tracking-wider font-['VT323'] sm:text-base">Make My Shop.exe</span>
+                    </div>
+                    <div class="flex gap-1">
+                        <button class="win-button w-4 h-4 text-[10px] flex items-center justify-center font-bold">_</button>
+                        <button class="win-button w-4 h-4 text-[10px] flex items-center justify-center font-bold">□</button>
+                        <button class="win-button w-4 h-4 text-[10px] flex items-center justify-center font-bold text-red-900">×</button>
+                    </div>
+                </div>
+
+                <div class="p-3 flex flex-col justify-between flex-grow">
+                    <div>
+                        <!-- QR Code Container -->
+                        <div class="win-inset p-3 sm:p-4 text-center mb-4 bg-white flex flex-col items-center justify-center min-h-[180px]">
+                            <div id="qrcode" class="p-2 border-2 border-black bg-white inline-block"></div>
+                            <span id="txt-scan-hint" class="text-base sm:text-xl font-bold text-blue-900 font-['VT323'] mt-2 tracking-widest">
+                                СКАНИРУЙ
+                            </span>
+                        </div>
+
+                        <!-- Product Title Block -->
+                        <div class="border-b-2 border-gray-400 pb-2 mb-3">
+                            <h2 class="text-xl sm:text-2xl font-bold font-['Press_Start_2P'] tracking-tighter text-blue-900 leading-tight">
+                                MAKE<br>MY SHOP
+                            </h2>
+                            <p id="txt-mms-subtitle" class="text-xs font-bold text-teal-800 mt-2 font-mono">
+                                CRM система в Telegram
+                            </p>
+                        </div>
+
+                        <!-- Product Description -->
+                        <p id="txt-mms-desc" class="text-xs text-gray-800 leading-relaxed font-mono mb-6">
+                            Многопользовательская CRM-система и платформа для магазинов в Telegram. Проект с открытым исходным кодом (Open-Source), удобное управление товарами и заказами.
+                        </p>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="pt-2 border-t border-gray-300">
+                        <a id="tgBotBtn" 
+                           href="https://t.me/YOUR_BOT_USERNAME_HERE" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="win-button w-full py-3 px-4 block text-center font-bold text-base sm:text-lg tracking-widest text-black hover:bg-yellow-100 flex items-center justify-center gap-2">
+                            <span>➔</span>
+                            <span id="txt-btn-open">СМОТРЕТЬ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WINDOW 2: В РАЗРАБОТКЕ -->
+            <div class="win-outset p-1 flex flex-col justify-between h-full shadow-2xl">
+                <div class="win-titlebar px-2 py-1 flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-300 font-mono text-xs">⚙</span>
+                        <span class="font-bold text-sm tracking-wider font-['VT323'] sm:text-base">Module_02.sys</span>
+                    </div>
+                    <div class="flex gap-1">
+                        <button class="win-button w-4 h-4 text-[10px] flex items-center justify-center font-bold">_</button>
+                        <button class="win-button w-4 h-4 text-[10px] flex items-center justify-center font-bold">□</button>
+                        <button class="win-button w-4 h-4 text-[10px] flex items-center justify-center font-bold text-red-900">×</button>
+                    </div>
+                </div>
+
+                <div class="p-3 flex flex-col justify-between flex-grow">
+                    <div>
+                        <!-- Placeholder Graphic -->
+                        <div class="win-inset p-4 text-center mb-4 bg-gray-100 flex flex-col items-center justify-center min-h-[180px]">
+                            <div class="text-4xl sm:text-5xl mb-2 animate-bounce">⏳</div>
+                            <span id="txt-dev-status" class="text-xs font-mono font-bold text-gray-600">
+                                [ 0% COMPLETED ]
+                            </span>
+                        </div>
+
+                        <!-- Title Block -->
+                        <div class="border-b-2 border-gray-400 pb-2 mb-3">
+                            <h2 id="txt-dev-title" class="text-xl sm:text-2xl font-bold font-['Press_Start_2P'] tracking-tighter text-gray-700 leading-tight">
+                                В разработке
+                            </h2>
+                            <p class="text-xs font-bold text-gray-600 mt-2 font-mono">
+                                needl3.net lab
+                            </p>
+                        </div>
+
+                        <!-- Description -->
+                        <p id="txt-dev-desc" class="text-xs text-gray-700 leading-relaxed font-mono mb-6">
+                            Новые модули и системы автоматизации находятся в активной разработке.
+                        </p>
+                    </div>
+
+                    <!-- Disabled Button -->
+                    <div class="pt-2 border-t border-gray-300">
+                        <button disabled class="win-button w-full py-3 px-4 text-center text-xs sm:text-sm font-bold text-gray-500 cursor-not-allowed opacity-60">
+                            [ LOCKED / SOON ]
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Windows 95 Taskbar -->
+    <footer class="fixed bottom-0 left-0 w-full win-outset p-1 flex items-center justify-between z-50 h-11 bg-[#c0c0c0]">
+        <div class="flex items-center gap-1 sm:gap-2">
+            <!-- Start Button -->
+            <button class="win-button px-2 sm:px-3 py-1 flex items-center gap-1 font-bold text-xs sm:text-sm">
+                <span class="text-red-600 text-sm sm:text-base">❖</span>
+                <span id="txt-start-btn">Пуск</span>
+            </button>
+            <div class="h-6 w-[2px] bg-gray-500 border-r border-white hidden sm:block"></div>
+            <!-- Active Program Tab -->
+            <div class="win-inset px-2 sm:px-3 py-0.5 text-xs font-bold flex items-center gap-1 sm:gap-2 bg-gray-200 truncate max-w-[120px] sm:max-w-none">
+                <span class="text-blue-900">🖳</span>
+                <span id="txt-active-tab">needl3.net</span>
+            </div>
+        </div>
+
+        <!-- Clock & Language Tray -->
+        <div class="win-inset px-2 sm:px-3 py-1 text-xs font-mono flex items-center gap-2">
+            <span id="txt-lang-label" class="font-bold text-blue-900">RU</span>
+            <span class="text-gray-400">|</span>
+            <span id="clock">12:00</span>
+        </div>
+    </footer>
+
+    <script>
+        // Generate QR code dynamically based on CONFIG.tgBotUrl
+        function initQrCode() {
+            const qrContainer = document.getElementById("qrcode");
+            qrContainer.innerHTML = "";
+            const targetUrl = CONFIG.tgBotUrl || "https://t.me/";
+            
+            new QRCode(qrContainer, {
+                text: targetUrl,
+                width: 120,
+                height: 120,
+                colorDark : "#000080",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        // Language Switcher Function
+        function setLanguage(lang) {
+            if (!TRANSLATIONS[lang]) return;
+            currentLang = lang;
+
+            const t = TRANSLATIONS[lang];
+
+            // Update text contents safely
+            document.getElementById("txt-mms-subtitle").textContent = t.mmsSubtitle;
+            document.getElementById("txt-mms-desc").textContent = t.mmsDesc;
+            document.getElementById("txt-btn-open").textContent = t.btnOpenBot;
+            document.getElementById("txt-scan-hint").textContent = t.scanQrHint;
+            document.getElementById("txt-dev-title").textContent = t.devTitle;
+            document.getElementById("txt-dev-desc").textContent = t.devDesc;
+            document.getElementById("txt-dev-status").textContent = t.devStatus;
+            document.getElementById("txt-lang-label").textContent = t.langLabel;
+            document.getElementById("txt-start-btn").textContent = t.startBtn;
+            document.getElementById("txt-active-tab").textContent = t.activeTab;
+
+            // Highlight active language button
+            ['ru', 'en', 'es'].forEach(l => {
+                const btn = document.getElementById(`lang-${l}`);
+                if (l === lang) {
+                    btn.classList.add('bg-white', 'font-extrabold');
+                    btn.style.boxShadow = "inset 1.5px 1.5px 0px #000";
+                } else {
+                    btn.classList.remove('bg-white', 'font-extrabold');
+                    btn.style.boxShadow = "";
+                }
+            });
+        }
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById("clock").textContent = timeStr;
+        }
+
+        // Page Init
+        document.addEventListener("DOMContentLoaded", function() {
+            const tgBtn = document.getElementById("tgBotBtn");
+            if (tgBtn && CONFIG.tgBotUrl) {
+                tgBtn.href = CONFIG.tgBotUrl;
+            }
+
+            initQrCode();
+            setLanguage('ru');
+            updateClock();
+            setInterval(updateClock, 1000);
+        });
+    </script>
+</body>
+</html>
