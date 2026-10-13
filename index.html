@@ -18,7 +18,7 @@
 
     <script>
       // =========================================================
-      // CONFIG: Вставьте вашу ссылку на Telegram-бот сюда!
+      // CONFIG: Ссылки на Telegram-бот и GitHub
       // =========================================================
       const CONFIG = {
         tgBotUrl: "https://t.me/make_my_shop_bot",
@@ -29,11 +29,41 @@
       const TRANSLATIONS = {
         ru: {
           mmsSubtitle: "Конструктор магазинов с CRM в Telegram",
-          mmsDesc: 'Конструктор онлайн-магазинов и CRM-система прямо в Telegram. Запускайте свой магазин за пару минут, управляйте каталогом товаров, заказами и клиентами в одном месте. Open-Source проект (<a href="' + CONFIG.githubUrl + '" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).',
+          mmsDesc: `
+            <ul class="space-y-1.5 text-xs sm:text-sm font-mono font-semibold text-gray-900">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span><b>Конструктор онлайн-магазинов</b> прямо в Telegram</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span><b>Встроенная CRM:</b> управление товарами, заказами и клиентами</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span>Запуск своего магазина за пару минут</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span>Open-Source проект (<a href="${CONFIG.githubUrl}" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>)</span>
+              </li>
+            </ul>
+          `,
           btnOpenBot: "СМОТРЕТЬ",
           scanQrHint: "СКАНИРУЙ",
           devTitle: "В разработке",
-          devDesc: "Новые модули и системы автоматизации находятся в активной разработке.",
+          devDesc: `
+            <ul class="space-y-1.5 text-xs sm:text-sm font-mono font-semibold text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-gray-500 font-bold">▸</span>
+                <span>Новые модули и функции</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gray-500 font-bold">▸</span>
+                <span>Системы автоматизации в разработке</span>
+              </li>
+            </ul>
+          `,
           devStatus: "[ 0% COMPLETED ]",
           langLabel: "RU",
           startBtn: "Пуск",
@@ -41,11 +71,41 @@
         },
         en: {
           mmsSubtitle: "Telegram Shop Builder & CRM System",
-          mmsDesc: 'No-code Telegram shop builder and built-in CRM platform. Launch your e-commerce store in minutes, manage products, orders, and clients in one place. Open-source project (<a href="' + CONFIG.githubUrl + '" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).',
+          mmsDesc: `
+            <ul class="space-y-1.5 text-xs sm:text-sm font-mono font-semibold text-gray-900">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span><b>E-commerce shop builder</b> inside Telegram</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span><b>Built-in CRM:</b> manage products, orders, & clients</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span>Launch your store in minutes</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span>Open-source project (<a href="${CONFIG.githubUrl}" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>)</span>
+              </li>
+            </ul>
+          `,
           btnOpenBot: "VIEW",
           scanQrHint: "SCAN ME",
           devTitle: "In Development",
-          devDesc: "New modules and automation systems are currently under active development.",
+          devDesc: `
+            <ul class="space-y-1.5 text-xs sm:text-sm font-mono font-semibold text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-gray-500 font-bold">▸</span>
+                <span>New modules & features</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gray-500 font-bold">▸</span>
+                <span>Automation systems under development</span>
+              </li>
+            </ul>
+          `,
           devStatus: "[ 0% COMPLETED ]",
           langLabel: "EN",
           startBtn: "Start",
@@ -53,11 +113,41 @@
         },
         es: {
           mmsSubtitle: "Constructor de Tiendas y CRM en Telegram",
-          mmsDesc: 'Plataforma para crear tiendas online y sistema CRM integrado en Telegram. Lanza tu tienda en minutos, gestiona productos, pedidos y clientes en un solo lugar. Proyecto de código abierto (<a href="' + CONFIG.githubUrl + '" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).',
+          mmsDesc: `
+            <ul class="space-y-1.5 text-xs sm:text-sm font-mono font-semibold text-gray-900">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span><b>Constructor de tiendas</b> dentro de Telegram</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span><b>CRM integrado:</b> gestión de productos, pedidos y clientes</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span>Lanza tu tienda en pocos minutos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-900 font-bold">▸</span>
+                <span>Proyecto de código abierto (<a href="${CONFIG.githubUrl}" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>)</span>
+              </li>
+            </ul>
+          `,
           btnOpenBot: "VER",
           scanQrHint: "ESCÁNAME",
           devTitle: "En Desarrollo",
-          devDesc: "Nuevos módulos y sistemas de automatización están en desarrollo activo.",
+          devDesc: `
+            <ul class="space-y-1.5 text-xs sm:text-sm font-mono font-semibold text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-gray-500 font-bold">▸</span>
+                <span>Nuevos módulos y funciones</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gray-500 font-bold">▸</span>
+                <span>Sistemas de automatización en desarrollo</span>
+              </li>
+            </ul>
+          `,
           devStatus: "[ 0% COMPLETED ]",
           langLabel: "ES",
           startBtn: "Inicio",
@@ -214,10 +304,10 @@
                             </p>
                         </div>
 
-                        <!-- Product Description with GitHub Link -->
-                        <p id="txt-mms-desc" class="text-sm sm:text-base font-semibold text-gray-900 leading-relaxed font-mono mb-6">
-                            Конструктор онлайн-магазинов и CRM-система прямо в Telegram. Запускайте свой магазин за пару минут, управляйте каталогом товаров, заказами и клиентами в одном месте. Open-Source проект (<a href="https://github.com/0x0nion/make_my_shop_telegram_bot" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).
-                        </p>
+                        <!-- Product Description List -->
+                        <div id="txt-mms-desc" class="mb-6">
+                            <!-- Populated dynamically via JS -->
+                        </div>
                     </div>
 
                     <!-- Action Button -->
@@ -268,10 +358,10 @@
                             </p>
                         </div>
 
-                        <!-- Description -->
-                        <p id="txt-dev-desc" class="text-sm sm:text-base font-semibold text-gray-900 leading-relaxed font-mono mb-6">
-                            Новые модули и системы автоматизации находятся в активной разработке.
-                        </p>
+                        <!-- Description List -->
+                        <div id="txt-dev-desc" class="mb-6">
+                            <!-- Populated dynamically via JS -->
+                        </div>
                     </div>
 
                     <!-- Disabled Button -->
@@ -334,13 +424,13 @@
 
             const t = TRANSLATIONS[lang];
 
-            // Update innerHTML to allow html tags like <a> inside description
+            // Update text/html contents safely
             document.getElementById("txt-mms-subtitle").textContent = t.mmsSubtitle;
             document.getElementById("txt-mms-desc").innerHTML = t.mmsDesc;
             document.getElementById("txt-btn-open").textContent = t.btnOpenBot;
             document.getElementById("txt-scan-hint").textContent = t.scanQrHint;
             document.getElementById("txt-dev-title").textContent = t.devTitle;
-            document.getElementById("txt-dev-desc").textContent = t.devDesc;
+            document.getElementById("txt-dev-desc").innerHTML = t.devDesc;
             document.getElementById("txt-dev-status").textContent = t.devStatus;
             document.getElementById("txt-lang-label").textContent = t.langLabel;
             document.getElementById("txt-start-btn").textContent = t.startBtn;
