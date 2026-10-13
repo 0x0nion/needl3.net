@@ -21,14 +21,15 @@
       // CONFIG: Вставьте вашу ссылку на Telegram-бот сюда!
       // =========================================================
       const CONFIG = {
-        tgBotUrl: "https://t.me/make_my_shop_bot"
+        tgBotUrl: "https://t.me/make_my_shop_bot",
+        githubUrl: "https://github.com/0x0nion/make_my_shop_telegram_bot"
       };
 
       // TRANSLATIONS: Тексты на RU / EN / ES
       const TRANSLATIONS = {
         ru: {
           mmsSubtitle: "Конструктор магазинов с CRM в Telegram",
-          mmsDesc: "Конструктор онлайн-магазинов и CRM-система прямо в Telegram. Запускайте свой магазин за пару минут, управляйте каталогом товаров, заказами и клиентами в одном месте. Open-Source проект.",
+          mmsDesc: 'Конструктор онлайн-магазинов и CRM-система прямо в Telegram. Запускайте свой магазин за пару минут, управляйте каталогом товаров, заказами и клиентами в одном месте. Open-Source проект (<a href="' + CONFIG.githubUrl + '" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).',
           btnOpenBot: "СМОТРЕТЬ",
           scanQrHint: "СКАНИРУЙ",
           devTitle: "В разработке",
@@ -40,7 +41,7 @@
         },
         en: {
           mmsSubtitle: "Telegram Shop Builder & CRM System",
-          mmsDesc: "No-code Telegram shop builder and built-in CRM platform. Launch your e-commerce store in minutes, manage products, orders, and clients in one place. Open-source project.",
+          mmsDesc: 'No-code Telegram shop builder and built-in CRM platform. Launch your e-commerce store in minutes, manage products, orders, and clients in one place. Open-source project (<a href="' + CONFIG.githubUrl + '" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).',
           btnOpenBot: "VIEW",
           scanQrHint: "SCAN ME",
           devTitle: "In Development",
@@ -52,7 +53,7 @@
         },
         es: {
           mmsSubtitle: "Constructor de Tiendas y CRM en Telegram",
-          mmsDesc: "Plataforma para crear tiendas online y sistema CRM integrado en Telegram. Lanza tu tienda en minutos, gestiona productos, pedidos y clientes en un solo lugar. Proyecto de código abierto.",
+          mmsDesc: 'Plataforma para crear tiendas online y sistema CRM integrado en Telegram. Lanza tu tienda en minutos, gestiona productos, pedidos y clientes en un solo lugar. Proyecto de código abierto (<a href="' + CONFIG.githubUrl + '" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).',
           btnOpenBot: "VER",
           scanQrHint: "ESCÁNAME",
           devTitle: "En Desarrollo",
@@ -213,9 +214,9 @@
                             </p>
                         </div>
 
-                        <!-- Product Description -->
+                        <!-- Product Description with GitHub Link -->
                         <p id="txt-mms-desc" class="text-sm sm:text-base font-semibold text-gray-900 leading-relaxed font-mono mb-6">
-                            Конструктор онлайн-магазинов и CRM-система прямо в Telegram. Запускайте свой магазин за пару минут, управляйте каталогом товаров, заказами и клиентами в одном месте. Open-Source проект.
+                            Конструктор онлайн-магазинов и CRM-система прямо в Telegram. Запускайте свой магазин за пару минут, управляйте каталогом товаров, заказами и клиентами в одном месте. Open-Source проект (<a href="https://github.com/0x0nion/make_my_shop_telegram_bot" target="_blank" class="text-blue-900 underline hover:text-blue-700 font-bold">GitHub</a>).
                         </p>
                     </div>
 
@@ -333,9 +334,9 @@
 
             const t = TRANSLATIONS[lang];
 
-            // Update text contents safely
+            // Update innerHTML to allow html tags like <a> inside description
             document.getElementById("txt-mms-subtitle").textContent = t.mmsSubtitle;
-            document.getElementById("txt-mms-desc").textContent = t.mmsDesc;
+            document.getElementById("txt-mms-desc").innerHTML = t.mmsDesc;
             document.getElementById("txt-btn-open").textContent = t.btnOpenBot;
             document.getElementById("txt-scan-hint").textContent = t.scanQrHint;
             document.getElementById("txt-dev-title").textContent = t.devTitle;
