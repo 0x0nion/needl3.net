@@ -176,8 +176,8 @@
             color: #000;
             user-select: none;
             overflow-x: hidden;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);
-            background-size: 4px 4px;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 0);
+            background-size: 6px 6px;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -221,13 +221,14 @@
             color: var(--win-white);
         }
 
+        /* Рябь сделана менее заметной и мягче */
         .scanlines {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 100;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%);
-            background-size: 100% 4px;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.035) 50%);
+            background-size: 100% 6px;
         }
 
         #qrcode img {
@@ -268,7 +269,7 @@
                     <span class="text-sm leading-none">🇬🇧</span><span class="font-['Share_Tech_Mono']">EN</span>
                 </button>
                 <button onclick="setLanguage('es')" id="lang-es" class="win-button px-2.5 py-1 text-xs font-bold flex items-center gap-1.5">
-                    <span class="text-sm leading-none">🇦🇷</span><span class="font-['Share_Tech_Mono']">ES</span>
+                    <span class="text-sm leading-none">🇪🇸</span><span class="font-['Share_Tech_Mono']">ES</span>
                 </button>
             </div>
         </header>
