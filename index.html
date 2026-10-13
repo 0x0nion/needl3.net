@@ -237,7 +237,6 @@
             height: auto;
         }
 
-        /* Mobile responsiveness adjustments */
         @media (max-width: 640px) {
             body {
                 font-size: 14px;
@@ -260,11 +259,17 @@
                 </span>
             </div>
 
-            <!-- Language Switcher Bar -->
-            <div class="flex items-center gap-1 bg-[#a0a0a0] p-1 border border-gray-600">
-                <button onclick="setLanguage('ru')" id="lang-ru" class="win-button px-2 py-1 text-xs font-bold bg-white">RU</button>
-                <button onclick="setLanguage('en')" id="lang-en" class="win-button px-2 py-1 text-xs font-bold">EN</button>
-                <button onclick="setLanguage('es')" id="lang-es" class="win-button px-2 py-1 text-xs font-bold">ES</button>
+            <!-- Language Switcher Bar with Flags -->
+            <div class="flex items-center gap-1.5 win-inset p-1 bg-[#c0c0c0]">
+                <button onclick="setLanguage('ru')" id="lang-ru" class="win-button px-2.5 py-1 text-xs font-bold flex items-center gap-1.5 bg-white">
+                    <span class="text-sm leading-none">🇷🇺</span><span class="font-['Share_Tech_Mono']">RU</span>
+                </button>
+                <button onclick="setLanguage('en')" id="lang-en" class="win-button px-2.5 py-1 text-xs font-bold flex items-center gap-1.5">
+                    <span class="text-sm leading-none">🇬🇧</span><span class="font-['Share_Tech_Mono']">EN</span>
+                </button>
+                <button onclick="setLanguage('es')" id="lang-es" class="win-button px-2.5 py-1 text-xs font-bold flex items-center gap-1.5">
+                    <span class="text-sm leading-none">🇦🇷</span><span class="font-['Share_Tech_Mono']">ES</span>
+                </button>
             </div>
         </header>
 
@@ -376,27 +381,27 @@
         </div>
     </main>
 
-    <!-- Windows 95 Taskbar -->
-    <footer class="fixed bottom-0 left-0 w-full win-outset p-1 flex items-center justify-between z-50 h-11 bg-[#c0c0c0]">
-        <div class="flex items-center gap-1 sm:gap-2">
+    <!-- Windows 95 Taskbar (Aligned & Fixed) -->
+    <footer class="fixed bottom-0 left-0 w-full win-outset px-2 py-1 flex items-center justify-between z-50 h-11 bg-[#c0c0c0]">
+        <div class="flex items-center gap-1.5 sm:gap-2 h-full">
             <!-- Start Button -->
-            <button class="win-button px-2 sm:px-3 py-1 flex items-center gap-1 font-bold text-xs sm:text-sm">
-                <span class="text-red-600 text-sm sm:text-base">❖</span>
-                <span id="txt-start-btn">Пуск</span>
+            <button class="win-button px-2.5 sm:px-3 h-8 flex items-center gap-1.5 font-bold text-xs sm:text-sm">
+                <span class="text-red-600 text-sm sm:text-base leading-none">❖</span>
+                <span id="txt-start-btn" class="leading-none pt-0.5">Пуск</span>
             </button>
-            <div class="h-6 w-[2px] bg-gray-500 border-r border-white hidden sm:block"></div>
+            <div class="h-6 w-[2px] bg-gray-500 border-r border-white hidden sm:block mx-0.5"></div>
             <!-- Active Program Tab -->
-            <div class="win-inset px-2 sm:px-3 py-0.5 text-xs font-bold flex items-center gap-1 sm:gap-2 bg-gray-200 truncate max-w-[120px] sm:max-w-none">
-                <span class="text-blue-900">🖳</span>
-                <span id="txt-active-tab">needl3.net</span>
+            <div class="win-inset px-2.5 sm:px-3 h-8 text-xs font-bold flex items-center gap-1.5 sm:gap-2 bg-gray-200 truncate max-w-[120px] sm:max-w-none">
+                <span class="text-blue-900 text-sm leading-none">🖳</span>
+                <span id="txt-active-tab" class="leading-none pt-0.5">needl3.net</span>
             </div>
         </div>
 
         <!-- Clock & Language Tray -->
-        <div class="win-inset px-2 sm:px-3 py-1 text-xs font-mono flex items-center gap-2">
-            <span id="txt-lang-label" class="font-bold text-blue-900">RU</span>
-            <span class="text-gray-400">|</span>
-            <span id="clock">12:00</span>
+        <div class="win-inset px-2.5 sm:px-3 h-8 text-xs font-mono flex items-center gap-2">
+            <span id="txt-lang-label" class="font-bold text-blue-900 leading-none">RU</span>
+            <span class="text-gray-400 leading-none">|</span>
+            <span id="clock" class="leading-none">12:00</span>
         </div>
     </footer>
 
